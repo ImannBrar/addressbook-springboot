@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>AddressBook</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        h1 { margin-bottom: 0.25rem; }
+        .muted { color: #666; }
+        ul { padding-left: 1.25rem; }
+        li { margin: 0.25rem 0; }
+        .empty { color: #b00; }
+    </style>
+</head>
+<body>
+<h1>AddressBook</h1>
+<p class="muted">Viewing book:
+    <span th:text="${exists} ? ${book.id} : 'not found'">id</span>
+</p>
+
+<div th:if="${!exists}">
+    <p class="empty">AddressBook not found.</p>
+</div>
+
+<div th:if="${exists}">
+    <h2>Buddies</h2>
+    <ul>
+        <li th:each="b : ${book.buddies}" th:text="${b.name} + ' (' + ${b.phone} + ')'">Buddy</li>
+    </ul>
+    <div th:if="${#lists.isEmpty(book.buddies)}" class="muted">No buddies yet.</div>
+</div>
+</body>
+</html>
