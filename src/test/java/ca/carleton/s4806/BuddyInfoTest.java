@@ -27,4 +27,11 @@ class BuddyInfoTest {
         BuddyInfo b = new BuddyInfo("Alice", "555-0100");
         assertEquals("Alice (555-0100)", b.toString());
     }
+    @org.junit.jupiter.api.Test
+    void addressField_works() {
+        BuddyInfo b = new BuddyInfo("Alice", "555-0100");
+        b.setAddress("123 Main St");
+        org.junit.jupiter.api.Assertions.assertEquals("123 Main St", b.getAddress());
+    }
+
 }

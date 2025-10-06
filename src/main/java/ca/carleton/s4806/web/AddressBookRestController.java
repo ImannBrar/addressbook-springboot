@@ -46,6 +46,7 @@ public class AddressBookRestController {
 
         return books.findById(id).map(book -> {
             BuddyInfo b = new BuddyInfo(req.name(), req.phone());
+            b.setAddress(req.address());
             book.addBuddy(b);
             books.save(book); // cascades to buddies
             return ResponseEntity.ok(book);

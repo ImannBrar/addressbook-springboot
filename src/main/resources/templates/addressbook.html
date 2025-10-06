@@ -25,7 +25,13 @@
 <div th:if="${exists}">
     <h2>Buddies</h2>
     <ul>
-        <li th:each="b : ${book.buddies}" th:text="${b.name} + ' (' + ${b.phone} + ')'">Buddy</li>
+        <li th:each="b : ${book.buddies}">
+            <span th:text="${b.name}">Name</span>
+            (<span th:text="${b.phone}">Phone</span>)
+            <span th:if="${b.address != null and #strings.trim(b.address) != ''}">
+      — <span th:text="${b.address}">Address</span>
+    </span>
+        </li>
     </ul>
     <div th:if="${#lists.isEmpty(book.buddies)}" class="muted">No buddies yet.</div>
 </div>

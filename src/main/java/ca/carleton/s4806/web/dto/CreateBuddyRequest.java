@@ -4,5 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CreateBuddyRequest(
         @NotBlank String name,
-        @NotBlank String phone
+        @NotBlank String phone,
+        String address
 ) {}

@@ -44,22 +44,22 @@ class AddressBookIntegrationTest {
         assertThat(list.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(list.getBody()).contains("\"id\"");
 
-        // 3) Add a buddy to the newly created book
+        // 3) Add a buddy (including address) to the newly created book
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> body =
-                new HttpEntity<>("{\"name\":\"Alice\",\"phone\":\"555-0100\"}", headers);
+                new HttpEntity<>("{\"name\":\"Alice\",\"phone\":\"555-0100\",\"address\":\"123 Main St\"}", headers);
 
-        ResponseEntity<String> addBuddy =
+        ResponseEntity<String> addBuddyResp =
                 rest.postForEntity(url(bookUrl + "/buddies"), body, String.class);
-        assertThat(addBuddy.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(addBuddy.getBody()).contains("Alice");
+        assertThat(addBuddyResp.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(addBuddyResp.getBody()).contains("Alice", "555-0100", "123 Main St");
 
         // 4) Fetch the book and verify the buddy is present
         ResponseEntity<String> fetched =
                 rest.getForEntity(url(bookUrl), String.class);
         assertThat(fetched.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(fetched.getBody()).contains("Alice").contains("555-0100");
+        assertThat(fetched.getBody()).contains("Alice", "555-0100", "123 Main St");
     }
 
     private String url(String path) {
