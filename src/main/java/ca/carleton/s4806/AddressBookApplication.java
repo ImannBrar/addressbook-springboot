@@ -29,6 +29,8 @@ public class AddressBookApplication {
             book.addBuddy(b1);
             book.addBuddy(b2);
             book.addBuddy(b3);
+
+            books.save(book);
         };
     }
 }
