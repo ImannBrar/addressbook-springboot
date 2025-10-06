@@ -16,11 +16,19 @@ public class AddressBookApplication {
     CommandLineRunner seed(AddressBookRepository books) {
         return args -> {
             AddressBook book = new AddressBook();
-            book.addBuddy(new BuddyInfo("imann", "555-0100"));
-            book.addBuddy(new BuddyInfo("brar", "555-0200"));
-            book.addBuddy(new BuddyInfo("testingggg", "555-0200"));
 
-            books.save(book);
+            BuddyInfo b1 = new BuddyInfo("Imann", "555-0100");
+            b1.setAddress("Nicol");
+
+            BuddyInfo b2 = new BuddyInfo("brar", "555-0200");
+            b2.setAddress("carleton uc");
+
+            BuddyInfo b3 = new BuddyInfo("testing", "555-0300");
+            b3.setAddress("6ix");
+
+            book.addBuddy(b1);
+            book.addBuddy(b2);
+            book.addBuddy(b3);
         };
     }
 }
