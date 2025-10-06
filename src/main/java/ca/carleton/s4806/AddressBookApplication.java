@@ -17,18 +17,12 @@ public class AddressBookApplication {
         return args -> {
             AddressBook book = new AddressBook();
 
-            BuddyInfo b1 = new BuddyInfo("Imann", "555-0100");
-            b1.setAddress("Nicol");
+            BuddyInfo b1 = new BuddyInfo("Imann and Parinaaz", "<3");
+            b1.setAddress("library");
 
-            BuddyInfo b2 = new BuddyInfo("brar", "555-0200");
-            b2.setAddress("carleton uc");
-
-            BuddyInfo b3 = new BuddyInfo("testing", "555-0300");
-            b3.setAddress("6ix");
 
             book.addBuddy(b1);
-            book.addBuddy(b2);
-            book.addBuddy(b3);
+
 
             books.save(book);
         };
