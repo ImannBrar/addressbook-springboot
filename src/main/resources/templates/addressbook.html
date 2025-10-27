@@ -5,35 +5,51 @@
     <title>AddressBook</title>
     <style>
         body { font-family: system-ui, sans-serif; margin: 2rem; }
-        h1 { margin-bottom: 0.25rem; }
         .muted { color: #666; }
         ul { padding-left: 1.25rem; }
         li { margin: 0.25rem 0; }
-        .empty { color: #b00; }
+        form { margin-top: 1rem; display: grid; gap: .5rem; max-width: 28rem; }
+        input { padding: .5rem; }
+        a { text-decoration: none; }
     </style>
 </head>
 <body>
-<h1>AddressBook</h1>
-<p class="muted">Viewing book:
-    <span th:text="${exists} ? ${book.id} : 'not found'">id</span>
-</p>
+<a href="/addressbooks">← All AddressBooks</a>
+<h1>AddressBook
+    <span class="muted">
+      (<span th:text="${exists} ? ${book.id} : 'not found'">id</span>)
+    </span>
+</h1>
 
 <div th:if="${!exists}">
-    <p class="empty">AddressBook not found.</p>
+    <p class="muted">AddressBook not found.</p>
 </div>
 
 <div th:if="${exists}">
     <h2>Buddies</h2>
-    <ul>
+    <ul id="buddy-list">
         <li th:each="b : ${book.buddies}">
-            <span th:text="${b.name}">Name</span>
-            (<span th:text="${b.phone}">Phone</span>)
-            <span th:if="${b.address != null and #strings.trim(b.address) != ''}">
-      — <span th:text="${b.address}">Address</span>
-    </span>
+            <strong th:text="${b.name}">Name</strong>
+            — <span th:text="${b.phone}">Phone</span>
+            <span th:if="${b.address} != null and !${#strings.isEmpty(b.address)}">
+          ( <span th:text="${b.address}">Address</span> )
+        </span>
         </li>
     </ul>
     <div th:if="${#lists.isEmpty(book.buddies)}" class="muted">No buddies yet.</div>
+
+    <h3>Add Buddy</h3>
+    <!-- Part 1 form posts to MVC; Part 2 will enhance to call REST -->
+    <form th:action="@{'/addressbooks/' + ${book.id} + '/buddies'}" method="post" id="add-buddy-form">
+        <input name="name" placeholder="Name" required />
+        <input name="phone" placeholder="Phone" required />
+        <input name="address" placeholder="Address (optional)" />
+        <button type="submit">Add buddy</button>
+    </form>
+    <noscript class="muted">JS off → classic flow still works.</noscript>
 </div>
+
+<!-- Progressive enhancement hook (Part 2) -->
+<script src="/spa/app.js" defer></script>
 </body>
 </html>

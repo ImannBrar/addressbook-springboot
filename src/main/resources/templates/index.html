@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>AddressBooks</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        header { display: flex; gap: 1rem; align-items: baseline; }
+        ul { padding-left: 1.25rem; }
+        li { margin: 0.25rem 0; }
+        form { margin: 1rem 0; }
+        .muted { color: #666; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>AddressBooks</h1>
+    <a href="/spa/">SPA version</a>
+</header>
+
+<section>
+    <h2>Create AddressBook</h2>
+    <form id="create-ab-form" method="post" action="/addressbooks">
+        <button type="submit">Create new address book</button>
+    </form>
+    <noscript class="muted">JS off → classic flow still works.</noscript>
+</section>
+
+<section>
+    <h2>Existing</h2>
+    <ul id="ab-list">
+        <li th:each="b : ${books}">
+            <a th:href="@{'/addressbooks/' + ${b.id}}">AddressBook [[${b.id}]]</a>
+        </li>
+    </ul>
+    <div th:if="${#lists.isEmpty(books)}" class="muted">None yet.</div>
+</section>
+
+<!-- Progressive enhancement hook (Part 2) -->
+<script src="/spa/app.js" defer></script>
+</body>
+</html>

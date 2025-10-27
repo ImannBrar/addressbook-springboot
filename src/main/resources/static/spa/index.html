@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>AddressBook – SPA</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        header { display: flex; gap: 1rem; align-items: baseline; }
+        ul { padding-left: 1.25rem; }
+        li { margin: 0.25rem 0; }
+        form { margin: 1rem 0; display: grid; gap: .5rem; max-width: 28rem; }
+        input { padding: .5rem; }
+        a { text-decoration: none; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>AddressBook – SPA</h1>
+    <a href="/addressbooks">Server-rendered version</a>
+</header>
+
+<main>
+    <section>
+        <h2>Create AddressBook</h2>
+        <form id="spa-create-ab">
+            <button type="submit">Create new address book</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>AddressBooks</h2>
+        <ul id="spa-ab-list"></ul>
+    </section>
+
+    <section id="spa-ab-detail" hidden>
+        <h2 id="ab-title"></h2>
+        <ul id="spa-buddy-list"></ul>
+
+        <h3>Add Buddy</h3>
+        <form id="spa-add-buddy">
+            <input name="name" placeholder="Name" required />
+            <input name="phone" placeholder="Phone" required />
+            <input name="address" placeholder="Address (optional)" />
+            <button type="submit">Add buddy</button>
+        </form>
+    </section>
+</main>
+
+<script src="/spa/app.js"></script>
+</body>
+</html>
