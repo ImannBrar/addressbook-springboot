@@ -17,7 +17,7 @@ public class AddressBookApplication {
         return args -> {
             AddressBook book = new AddressBook();
 
-            BuddyInfo b1 = new BuddyInfo("Imann and Parinaaz", "<3");
+            BuddyInfo b1 = new BuddyInfo("Imann", "6ix");
             b1.setAddress("library");
 
 
