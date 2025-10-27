@@ -18,7 +18,7 @@ public class BuddyInfo {
     @JsonBackReference
     private AddressBook addressBook;
 
-    protected BuddyInfo() {
+    public BuddyInfo() {
     }
 
     public BuddyInfo(String name, String phone) {
